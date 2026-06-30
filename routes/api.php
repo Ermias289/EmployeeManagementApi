@@ -25,6 +25,7 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('employee', EmployeeController::class);   
             Route::delete('/user/{id}', [AuthController::class, 'destroyUserAdmin']);
             Route::delete('/user', [AuthController::class, 'destroy']);
+            Route::get('/refresh-token', [AuthController::class, 'refreshToken']);
         });
     });
 ?>

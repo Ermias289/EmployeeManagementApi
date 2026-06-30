@@ -75,4 +75,12 @@ class AuthController extends Controller
 
         return response()->json(['error' => 'User not found'], 404);
     }
+
+    public function refreshToken(){
+        return response()->json(
+            [
+                'token' => auth('api')->refresh(),
+            ]
+        );
+    }
 }

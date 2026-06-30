@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('hire_date');
             $table->decimal('salary', 10, 2);
             $table->string('job_title');
-            $table->string('status')->default('active');
+            $table->enum('status',['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\DepartmentResource;
+use App\Models\Department;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Requests\UpdateDepartmentRequest;
 
 class DepartmentController extends Controller
 {
@@ -18,9 +21,11 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        return DepartmentResource::make(Department::create($validated));    
     }
 
     /**
@@ -28,15 +33,19 @@ class DepartmentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $department = Department::findOrFail($id);
+
+        return DepartmentResource::make($department);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        //
+        $department -> update($request->validated());
+
+        return new DepartmentResource($department);
     }
 
     /**
@@ -44,6 +53,10 @@ class DepartmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $department = Department::findOrFail($id);
+
+        $department -> delete();
+
+        return response()->noContent();
     }
 }

@@ -13,14 +13,14 @@ Route::prefix('v1')->group(function () {
     });
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    Route::delete('/user', [AuthController::class, 'destroy'])->middleware('auth:api');
-    Route::delete('/user/{id}', [AuthController::class, 'destroyUserAdmin']);
 
-    // Route::middleware('auth:api')->group(function () {
+    Route::middleware('auth:api')->group(function () {
         Route::get('/me', [AuthController::class, 'me']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::apiResource('department', DepartmentController::class);
         Route::apiResource('employee', EmployeeController::class);   
-    // });
+        Route::delete('/user/{id}', [AuthController::class, 'destroyUserAdmin']);
+        Route::delete('/user', [AuthController::class, 'destroy']);
+    });
 });
 ?>

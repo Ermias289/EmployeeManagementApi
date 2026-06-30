@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,16 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        Department::create([
+            'name' => 'IT',
+            'description' => 'Handles systems and software',
+        ]);
+
+        Department::create([
+            'name' => 'HR',
+            'description' => 'Manages employees',
         ]);
     }
 }

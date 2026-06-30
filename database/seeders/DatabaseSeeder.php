@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 't@gmail.com',
         ]);
 
         Department::create([
@@ -32,5 +32,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'HR',
             'description' => 'Manages employees',
         ]);
+
+        $this->call([RolePermissionSeeder::class]);
     }
 }

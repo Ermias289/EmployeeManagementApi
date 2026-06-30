@@ -83,4 +83,16 @@ class AuthController extends Controller
             ]
         );
     }
+
+    public function assignRole(Request $request, User $user){
+        $request -> validate([
+            'role' => 'required|exist:role,name'
+        ]);
+
+        $user->syncRoles([$request -> role]);
+
+        return response()->json([
+            'message' => 'Role assigned successfully'
+        ]);
+    }
 }

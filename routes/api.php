@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/user/{id}', [AuthController::class, 'destroyUserAdmin']);
             Route::delete('/user', [AuthController::class, 'destroy']);
             Route::get('/refresh-token', [AuthController::class, 'refreshToken']);
+            Route::post('/users/{user}/assign-role', [UserController::class, 'assignRole']);
         });
     });
 ?>

@@ -34,15 +34,19 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        return EmployeeResource::make($employee);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        $employee -> update($request->validated());
+
+        return new EmployeeResource($employee);
     }
 
     /**
@@ -50,6 +54,10 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        $employee -> delete();
+
+        return response()->noContent();
     }
 }

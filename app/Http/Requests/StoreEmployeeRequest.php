@@ -29,9 +29,9 @@ class StoreEmployeeRequest extends FormRequest
             "phone_number"=> "required|string|unique:employees,phone_number",
             "department_id" => "required|integer|exists:departments,id",
             "hire_date" => "required|date_format:Y-m-d|before:today",
-            "salary" => "nullable|decimal",
+            "salary" => "nullable|numeric|min:0",
             "job_title" => "nullable|string|max:255",
-            "status" => "required|enum|in:active,inactive"
+            "status" => "required|in:active,inactive"
         ];
     }
 

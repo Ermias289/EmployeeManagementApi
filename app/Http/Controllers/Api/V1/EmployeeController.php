@@ -11,11 +11,13 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        
         return EmployeeResource::collection(Employee::all());
     }
 
@@ -60,4 +62,6 @@ class EmployeeController extends Controller
 
         return response()->noContent();
     }
+
+     
 }

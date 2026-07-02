@@ -28,7 +28,7 @@ class AuthController extends Controller
             'user' => $user,
         ], 201);
     }
-
+    
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -37,9 +37,17 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        $user = auth('api')->user();
+
+        // IMPORTANT: force load Spatie relations
+        $user->load('roles', 'permissions');
+
         return response()->json([
             'message' => 'User logged in successfully',
             'token' => $token,
+            'user' => $user,
+            'roles' => $user->getRoleNames(),
+            'permissions' => $user->getAllPermissions()->pluck('name'),
         ]);
     }
 

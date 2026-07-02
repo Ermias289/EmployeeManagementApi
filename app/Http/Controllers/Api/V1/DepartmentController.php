@@ -59,4 +59,12 @@ class DepartmentController extends Controller
 
         return response()->noContent();
     }
+
+     public function __construct()
+    {
+        $this->middleware('permission:department.view')->only('index');
+        $this->middleware('permission:department.create')->only('store');
+        $this->middleware('permission:department.update')->only('update');
+        $this->middleware('permission:department.delete')->only('destroy');
+    }
 }
